@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protocolo 394.616</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@500;600;700&family=PT+Sans:wght@400;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#ECEFE7; --surface:#FFFFFF; --surface-2:#F5F6F1;
+    --ink:#1E2B22; --ink-soft:#56634F; --ink-faint:#8B9584;
+    --accent:#2F5233; --foil:#9C701F; --ok:#2F6B4F; --alert:#A23B2E;
+    --line: rgba(30,43,34,0.13); --line-strong: rgba(30,43,34,0.22);
+    --shadow: 0 1px 2px rgba(20,28,18,0.06), 0 8px 24px -12px rgba(20,28,18,0.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#10160F; --surface:#171F16; --surface-2:#1D261B;
+      --ink:#E7E8DE; --ink-soft:#A3B097; --ink-faint:#6C7965;
+      --accent:#7FB48C; --foil:#D8AE55; --ok:#7FB48C; --alert:#E17A63;
+      --line: rgba(231,232,222,0.14); --line-strong: rgba(231,232,222,0.24);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"PT Sans","Segoe UI",Arial,sans-serif;line-height:1.5;}
+  h1,h2,.display{font-family:"Piazzolla","Iowan Old Style",Georgia,serif;}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;font-variant-numeric:tabular-nums;}
+  .page{max-width:820px;margin:0 auto;padding:2.75rem 1.5rem 4rem;}
+  header.masthead{display:flex;flex-direction:column;gap:.35rem;padding-bottom:1.5rem;border-bottom:1px solid var(--line-strong);margin-bottom:1.75rem;}
+  .eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--foil);font-weight:700;}
+  .masthead-row h1{font-size:clamp(1.6rem,4vw,2.15rem);font-weight:600;margin:0;color:var(--ink);}
+  .masthead-sub{color:var(--ink-soft);font-size:.97rem;}
+  .error-banner{background:color-mix(in srgb, var(--alert) 12%, transparent);border:1px solid color-mix(in srgb, var(--alert) 40%, transparent);color:var(--alert);border-radius:8px;padding:.75rem 1rem;font-size:.88rem;margin-bottom:1.5rem;}
+  .hero{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:1.6rem 1.75rem;display:flex;flex-direction:column;gap:1rem;margin-bottom:1.75rem;}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;}
+  .hero-label{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:.3rem;}
+  .etapa-atual{font-size:clamp(1.5rem,4.5vw,2rem);font-weight:600;line-height:1.2;}
+  .pill{display:inline-flex;align-items:center;gap:.35rem;padding:.28rem .65rem;border-radius:999px;font-size:.78rem;font-weight:600;border:1px solid var(--line-strong);white-space:nowrap;}
+  .pill.status-ok{color:var(--ok);border-color:color-mix(in srgb, var(--ok) 45%, transparent);background:color-mix(in srgb, var(--ok) 12%, transparent);}
+  .pill.status-tipo{color:var(--ink-soft);background:var(--surface-2);}
+  .pill-dot{width:.45em;height:.45em;border-radius:50%;background:currentColor;}
+  .hero-foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;padding-top:.9rem;border-top:1px dashed var(--line);font-size:.82rem;color:var(--ink-faint);}
+  .section-title{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 .7rem;}
+  .facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:1.75rem;}
+  .fact{background:var(--surface);padding:.85rem 1.1rem;display:flex;flex-direction:column;gap:.2rem;}
+  .fact .k{font-size:.74rem;color:var(--ink-faint);}
+  .fact .v{font-size:.95rem;color:var(--ink);word-break:break-word;}
+  .fact .v.money{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;}
+  @media (max-width:560px){.facts{grid-template-columns:1fr;}}
+  .history{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1.4rem 1.75rem 1.6rem;margin-bottom:1.5rem;}
+  .timeline{list-style:none;margin:0;padding:0;}
+  .timeline li{position:relative;padding:0 0 1.1rem 1.35rem;border-left:2px solid var(--line);margin-left:.2rem;}
+  .timeline li:last-child{border-left-color:transparent;padding-bottom:0;}
+  .timeline li::before{content:"";position:absolute;left:-6.5px;top:.25rem;width:11px;height:11px;border-radius:50%;background:var(--accent);border:2px solid var(--surface);box-shadow:0 0 0 1px var(--line-strong);}
+  .timeline .when{font-size:.76rem;color:var(--ink-faint);margin-bottom:.15rem;}
+  .timeline .what{font-size:.93rem;}
+  .timeline .what b{color:var(--ink);}
+  .empty-state{color:var(--ink-faint);font-size:.92rem;padding:.4rem 0 .1rem;}
+  footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.78rem;color:var(--ink-faint);padding-top:1rem;}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div class="eyebrow">Acompanhamento de protocolo &middot; Registro de Imóveis &middot; Monitor local</div>
+    <div class="masthead-row"><h1>Protocolo <span class="mono">394.616</span></h1></div>
+    <div class="masthead-sub">Instrumento Particular com Força de Escritura Pública &middot; Compra e Venda e Alienação Fiduciária</div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-top">
+      <div>
+        <div class="hero-label">Etapa atual</div>
+        <div class="etapa-atual">Análise do Título</div>
+      </div>
+      <div class="pill-row" style="display:flex;gap:.5rem;flex-wrap:wrap;">
+        <span class="pill status-ok"><span class="pill-dot"></span>VIGENTE</span>
+        <span class="pill status-tipo">QUALIFICACAO</span>
+      </div>
+    </div>
+    <div class="hero-foot">
+      <span>Interessado: <strong style="color:var(--ink-soft)">TOANE SBORZ DA COSTA</strong></span>
+      <span>Última verificação: <span class="mono">10/09/2026 17:54</span></span>
+    </div>
+  </section>
+
+  <h2 class="section-title">Dados do processo</h2>
+  <div class="facts">
+    <div class="fact"><span class="k">Solicitante</span><span class="v">JOHN RODRIGO DA COSTA</span></div>
+    <div class="fact"><span class="k">Serviço principal</span><span class="v">Compra e Venda e Alienação Fiduciária</span></div>
+    <div class="fact"><span class="k">Cadastro</span><span class="v mono">03/09/2026</span></div>
+    <div class="fact"><span class="k">Previsão de qualificação</span><span class="v mono">18/09/2026</span></div>
+    <div class="fact"><span class="k">Vencimento</span><span class="v mono">02/10/2026</span></div>
+    <div class="fact"><span class="k">Total do protocolo</span><span class="v money">R$ 5.747,21</span></div>
+    <div class="fact"><span class="k">Entrada</span><span class="v money">R$ 5.747,21</span></div>
+    <div class="fact"><span class="k">Saldo</span><span class="v money">R$ 0,00</span></div>
+  </div>
+
+  <section class="history">
+    <h2 class="section-title">Histórico de mudanças de etapa</h2>
+    <ul class="timeline">
+      <li>
+        <div class="when mono">08/09/2026 21:31</div>
+        <div class="what">De "Etapa de teste (simulada)" para <b>"Análise do Título"</b></div>
+      </li>
+      </ul>
+  </section>
+
+  <footer>
+    <span>🟢 monitor ativo (rodando desde o login) &middot; checagem de hora em hora, 06:30–22:30.</span>
+    <span class="mono">Página atualizada em 10/09/2026 17:54</span>
+  </footer>
+</div>
+</body>
+</html>
